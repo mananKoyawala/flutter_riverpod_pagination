@@ -4,14 +4,22 @@ import '../controller/home_controller.dart';
 
 class CommentsData {
   List<Comments>? data;
+  int count;
+  bool hasNext;
 
-  CommentsData({required this.data});
+  CommentsData(
+      {required this.data, required this.count, required this.hasNext});
 
-  CommentsData.initial() : data = null;
+  CommentsData.initial()
+      : data = null,
+        count = 10,
+        hasNext = true;
 
-  CommentsData copyWith({List<Comments>? data}) {
+  CommentsData copyWith({List<Comments>? data, int? count, bool? hasNext}) {
     return CommentsData(
       data: data ?? this.data,
+      count: (count ?? this.count) + 10,
+      hasNext: hasNext ?? this.hasNext,
     );
   }
 }

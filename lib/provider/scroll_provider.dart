@@ -8,12 +8,12 @@ final scrollProvider = StateProvider<ScrollController>((ref) {
   controller.addListener(() {
     if (controller.position.pixels == controller.position.maxScrollExtent) {
       // load bit eariler
-      final count = ref.read(countProvider);
+      // final count = ref.read(countProvider);
       final isLoading = ref.read(loadingProvider);
       if (!isLoading) {
         ref.read(loadingProvider.notifier).state = true;
-        ref.read(commentsProvider.notifier).loadData(count).then((e) {
-          ref.read(countProvider.notifier).state += 10;
+        ref.read(commentsProvider.notifier).loadData().then((e) {
+          // ref.read(countProvider.notifier).state += 10;
           ref.read(loadingProvider.notifier).state = false;
         });
       }

@@ -12,39 +12,45 @@ class CommentController extends StateNotifier<CommentsData> {
   }
 
   Future<void> _setUp() async {
-    loadData(10);
+    loadData();
   }
 
   HTTPClient c = HTTPClient();
 
-  Future<void> loadData(int count) async {
+  Future<void> loadData() async {
     // first time data being loaded
     if (state.data == null) {
+      // print(">>> ${state.count}");
+
       http.Response? res =
-          await c.get('https://dummyjson.com/comments?limit=$count');
+          await c.get('https://dummyjson.com/comments?limit=${state.count}');
       if (res != null) {
         final data = jsonDecode(res.body);
-        print(data);
+        // print(data);
         final comments = data["comments"] as List<dynamic>? ?? [];
         List<Comments> commentslist =
             comments.map((element) => Comments.fromJson(element)).toList();
-        print(comments);
-        state = state.copyWith(data: commentslist);
+        // print(comments);
+        state = state.copyWith(
+            data: commentslist, count: 0, hasNext: commentslist.length >= 10);
       }
     }
     // paginated data
     else {
-      http.Response? res =
-          await c.get('https://dummyjson.com/comments?limit=10&skip=$count');
+      // print(">>> ${state.count}");
+      http.Response? res = await c
+          .get('https://dummyjson.com/comments?limit=10&skip=${state.count}');
       if (res != null) {
         final currentData = state.data;
         final data = jsonDecode(res.body);
-        print(data);
+        // print(data);
         final comments = data["comments"] as List<dynamic>? ?? [];
         List<Comments> commentslist =
             comments.map((element) => Comments.fromJson(element)).toList();
-        print(comments);
-        state = state.copyWith(data: [...?currentData, ...commentslist]);
+        // print(comments);
+        state = state.copyWith(
+            data: [...?currentData, ...commentslist],
+            hasNext: commentslist.length == 10);
       }
     }
   }

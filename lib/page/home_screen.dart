@@ -36,13 +36,13 @@ class HomeScreen extends ConsumerWidget {
               },
             ),
           ),
-          isLoading
-              ? const Center(
-                  child: CircularProgressIndicator(
-                    color: Colors.green,
-                  ),
-                )
-              : Container(),
+          if (_commentsData.hasNext && isLoading)
+            const Center(
+              child: CircularProgressIndicator(
+                color: Colors.green,
+              ),
+            ),
+          if (!_commentsData.hasNext) const Text("No more data")
         ],
       ),
     );
