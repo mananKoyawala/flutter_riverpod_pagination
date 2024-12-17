@@ -1,16 +1,27 @@
-# paggination
+# Flutter Pagination with Riverpod
 
-A new Flutter project.
+This is a simple Flutter project demonstrating how to implement pagination using `StateNotifier` and `StateNotifierProvider` with the Riverpod state management library. It fetches comments from the [DummyJSON API](https://dummyjson.com/comments) and displays them in a paginated list.
 
-## Getting Started
+## Features
 
-This project is a starting point for a Flutter application.
+- Fetch and display comments from an API.
+- Paginated data loading.
+- Efficient state management using `StateNotifier` and `StateNotifierProvider`.
 
-A few resources to get you started if this is your first Flutter project:
+## Dependencies
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- [Flutter](https://flutter.dev)
+- [Riverpod](https://riverpod.dev)
+- [HTTP](https://pub.dev/packages/http)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## API Endpoint
+
+The app uses the following API endpoint to fetch comments:
+
+- **GET**: [https://dummyjson.com/comments](https://dummyjson.com/comments)
+
+## Example APK
+
+You can download and test the example APK from the following link:
+
+- [Download APK](output/app-release.apk)
